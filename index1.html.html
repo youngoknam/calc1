@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공학용 계산기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 350px;
+        }
+
+        .calculator .title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .calculator .display {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            height: 60px;
+        }
+
+        .calculator .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .calculator .row:last-child {
+            margin-bottom: 0;
+        }
+
+        .calculator .button {
+            flex: 1;
+            border: none;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculator .button.operator {
+            background-color: #ff9500;
+            color: #fff;
+        }
+
+        .calculator .button.operator:hover {
+            background-color: #e68a00;
+        }
+
+        .calculator .button.clear {
+            background-color: #ff3b30;
+            color: #fff;
+        }
+
+        .calculator .button.clear:hover {
+            background-color: #d63026;
+        }
+
+        .calculator .button.equal {
+            background-color: #4cd964;
+            color: #fff;
+        }
+
+        .calculator .button.equal:hover {
+            background-color: #34b233;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="title">공학용 계산기</div>
+        <div class="display" id="display">0</div>
+        <div class="row">
+            <button class="button clear" onclick="clearDisplay()">C</button>
+            <button class="button operator" onclick="appendToDisplay('/')">÷</button>
+        </div>
+        <div class="row">
+            <button class="button" onclick="appendToDisplay('7')">7</button>
+            <button class="button" onclick="appendToDisplay('8')">8</button>
+            <button class="button" onclick="appendToDisplay('9')">9</button>
+            <button class="button operator" onclick="appendToDisplay('*')">x</button>
+        </div>
+        <div class="row">
+            <button class="button" onclick="appendToDisplay('4')">4</button>
+            <button class="button" onclick="appendToDisplay('5')">5</button>
+            <button class="button" onclick="appendToDisplay('6')">6</button>
+            <button class="button operator" onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div class="row">
+            <button class="button" onclick="appendToDisplay('1')">1</button>
+            <button class="button" onclick="appendToDisplay('2')">2</button>
+            <button class="button" onclick="appendToDisplay('3')">3</button>
+            <button class="button operator" onclick="appendToDisplay('+')">+</button>
+        </div>
+        <div class="row">
+            <button class="button" onclick="appendToDisplay('0')">0</button>
+            <button class="button" onclick="appendToDisplay('.')">.</button>
+            <button class="button equal" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            var display = document.getElementById("display");
+            if (display.innerHTML === "0" && value !== ".") {
+                display.innerHTML = value;
+            } else {
+                display.innerHTML += value;
+            }
+        }
+
+        function clearDisplay() {
+            document.getElementById("display").innerHTML = "0";
+        }
+
+        function calculate() {
+            var display = document.getElementById("display");
+            try {
+                display.innerHTML = eval(display.innerHTML);
+            } catch (error) {
+                display.innerHTML = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
